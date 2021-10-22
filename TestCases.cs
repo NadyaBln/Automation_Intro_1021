@@ -8,7 +8,6 @@ using System.Reflection;
 using System.IO;
 using System.Threading;
 using OpenQA.Selenium.Interactions;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Automation_Intro_1021
 {
@@ -31,7 +30,7 @@ namespace Automation_Intro_1021
 
             string directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             string path = directory + "\\Resources\\ChromeDriverFile\\";
-            _driver = new ChromeDriver(path, options);
+           _driver = new ChromeDriver(path, options);
         }
 
         public string RandomString(int size, bool lowerCase = true)
@@ -52,8 +51,8 @@ namespace Automation_Intro_1021
         [Test]
         public void Registration()
         {
-
-            _driver.Url = "http://automationpractice.com";
+            //common registration on test site
+            _driver.Url = "http://automationpractice.com"; 
             Thread.Sleep(4000);
 
             //Signin btn
@@ -69,24 +68,30 @@ namespace Automation_Intro_1021
             var RegaRandom = new Random();
             int registrationInt = RegaRandom.Next(10, 99999);
             string registrationEmailString = "test_" + registrationInt.ToString() + "@test.com";
+            
+            int registrationPhoneint = RegaRandom.Next(10, 9999999);
+            string phone = registrationPhoneint.ToString();
+
             string FullName = RandomString(6, true);
-            string phone = registrationInt.ToString();
+
             var Birth = new Random();
             int BDay = Birth.Next(1, 30);
             int BMon = Birth.Next(1, 12);
             int BYea = Birth.Next(1920, 2000);
-            int zip = RegaRandom.Next(10000, 99999);
-            string zipSt = zip.ToString();
+
             string BdaySt = BDay.ToString();
             string BMonSt = BMon.ToString();
             string BYeaSt = BYea.ToString();
+
+            int zip = RegaRandom.Next(10000, 99999);
+            string zipSt = zip.ToString();
 
             //input email
             _driver.FindElement(By.Id("email_create")).SendKeys(registrationEmailString);
 
             //submit btn
             _driver.FindElement(By.Id("SubmitCreate")).Click();
-            Thread.Sleep(9000);
+            Thread.Sleep(6000);
 
             //check is there account_creation box
             bool accCreationBox = CommonFunctions.IsElementPresent(By.Id("account-creation_form"), _driver);
@@ -102,7 +107,7 @@ namespace Automation_Intro_1021
             //pass 
             _driver.FindElement(By.Id("passwd")).SendKeys("test1234");
 
-            //bitrh
+            //birth
             _driver.FindElement(By.Id("days")).SendKeys(BdaySt);
             _driver.FindElement(By.Id("months")).FindElement(By.XPath("//option[contains(text(),'February')]")).Click();
             _driver.FindElement(By.Id("years")).SendKeys(BYeaSt);
@@ -136,6 +141,7 @@ namespace Automation_Intro_1021
 
         public void UI_Interactions_FileUpload()
         {
+            //file uploading and checking is it uploaded
             _driver.Url = "https://demoqa.com/upload-download";
 
             //get path to file
@@ -186,12 +192,15 @@ namespace Automation_Intro_1021
             //save email to string 
             string thirdRowString = thirdRow.GetAttribute("textContent");
 
-            // //write to file email and time
-            // string directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            // string pathToFile = directory + @"\Resources\Files\emailFile.csv";
-            //// DateTime dt = Dat();
-            // File.AppendAllText(pathToFile, thirdRowString + ',');
-            // File.AppendAllText(pathToFile, Convert.ToString(dt) + ',' + Environment.NewLine);
+            //write to file email and actual time
+            //string directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            //string pathToFile = directory + @"\Resources\Files\emailFile.csv";
+            string pathToFile = Path.Combine(AppDomain.CurrentDomain.DynamicDirectory, @"\Resources\Files\emailFile.csv");
+            string dt = DateTime.Now.ToString();
+            File.AppendAllText(pathToFile, thirdRowString + ',');
+            File.AppendAllText(pathToFile, Convert.ToString(dt) + ',' + Environment.NewLine);
+
+            //now you can check value appearing in file: ProjectFolder -> \bin\Debug\net5.0\Resources\Files\emailFile.csv
         }
 
         [Test]
