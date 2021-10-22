@@ -1,15 +1,15 @@
 ## Description:
-	#Automation_Test_Project_1021 - is a collection of autotests to introduce my skills in C# + Selenium automation.
+	Automation_Test_Project_1021 - is a collection of autotests to introduce my skills in C# + Selenium automation.
 _________________________________________________
 ## Content:
-	###### Class 'TestCases.cs' contains:
+	Class 'TestCases.cs' contains:
 		1. Registration - just usual registration, also example of generated values;
 		2. UI_Interactions_dragdrop;
 		3. UI_Interactions_FileUpload;
-		3. UI_Interactions_WriteValueToFile;
-		4. Mobile
+		4. UI_Interactions_WriteValueToFile;
+		5. Mobile
 
-	###### 'CommonFunctions.cs' contains methods and functions which could be used for all tests:
+	'CommonFunctions.cs' contains methods and functions which could be used for all tests:
 		
 
 _________________________________________________
