@@ -203,47 +203,7 @@ namespace Automation_Intro_1021
             //now you can check value appearing in file: ProjectFolder -> \bin\Debug\net5.0\Resources\Files\emailFile.csv
         }
 
-        [Test]
-        public void Mobile()
-        {
-            //some mobile interactions
-
-            //open browser in mobile view
-            ChromeOptions options = new ChromeOptions();
-            options.EnableMobileEmulation("iPhone X");
-            string directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            string path = directory + "\\Resources\\ChromeDriverFile\\";
-            IWebDriver _driver = new ChromeDriver(path, options);
-
-            _driver.Navigate().GoToUrl("https://demoqa.com/");
-            Thread.Sleep(3000);
-
-            //open Widgets
-            _driver.FindElement(By.XPath("//div[@class='card mt-4 top-card'][4]")).Click();
-
-            //open  'Progress bar' tab
-            _driver.FindElement(By.XPath("//span[text()='Progress Bar']")).Click();
-
-            //check is it opened 
-            bool progressBar = CommonFunctions.IsElementPresent(By.Id("progressBarContainer"), _driver);
-            Assert.AreEqual(progressBar, true, "Progress bar tab was not opened");
-            Thread.Sleep(3000);
-
-            //click Start
-            IWebElement SSbtn = _driver.FindElement(By.Id("startStopButton"));
-            SSbtn.Click();
-
-            //click Stop when value=25%
-            if (_driver.FindElements(By.XPath("//div[@aria-valuenow='1']")).Count > 0)
-            {
-                SSbtn.Click();
-            }
-
-            Thread.Sleep(3000);
-
-
-
-        }
+      
 
 
 
