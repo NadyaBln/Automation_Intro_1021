@@ -1,6 +1,6 @@
 ## Description:
 	Automation_Test_Project_1021 - is a collection of autotests to introduce my skills in C# + Selenium automation.
-_________________________________________________
+
 ## Content:
 	Class 'TestCases.cs' contains:
 		1. Registration - just usual registration, also example of generated values;
@@ -9,10 +9,10 @@ _________________________________________________
 		4. UI_Interactions_WriteValueToFile;
 		5. Mobile
 
-	'CommonFunctions.cs' contains methods and functions which could be used for all tests:
+	'CommonFunctions.cs' contains methods and functions which could be used for all tests;
+	Folder 'Resources' contains ChromeWebDriver, file 'emailFile' for test values, folder 'Images';
 		
 
-_________________________________________________
 ## How to install:
 	Open solution with Visual Studio;
 	For solution you need NuGet packages:
