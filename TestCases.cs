@@ -12,21 +12,22 @@ using OpenQA.Selenium.Interactions;
 namespace Automation_Intro_1021
 {
     [TestFixture("Category1")]
-    public class TestCases
+    public class TC_Web
     {
         IWebDriver _driver;
 
-        public TestCases(string nodeType)
+        public TC_Web(string nodeType)
         {
 
         }
 
         [SetUp]
-        public void startBrowser()
+        public void StartBrowser()
         {
             ChromeOptions options = new ChromeOptions();
             options.AddArgument("--start-maximized");
             options.AddArgument("--disable-notifications");
+            CommonFunctions.GetUserdataFromResourceFile();
 
             string directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             string path = directory + "\\Resources\\ChromeDriverFile\\";
@@ -86,6 +87,8 @@ namespace Automation_Intro_1021
             int zip = RegaRandom.Next(10000, 99999);
             string zipSt = zip.ToString();
 
+            string pass = "test1234";
+
             //input email
             _driver.FindElement(By.Id("email_create")).SendKeys(registrationEmailString);
 
@@ -105,7 +108,7 @@ namespace Automation_Intro_1021
             _driver.FindElement(By.Name("customer_lastname")).SendKeys(FullName);
 
             //pass 
-            _driver.FindElement(By.Id("passwd")).SendKeys("test1234");
+            _driver.FindElement(By.Id("passwd")).SendKeys(pass);
 
             //birth
             _driver.FindElement(By.Id("days")).SendKeys(BdaySt);
@@ -193,19 +196,16 @@ namespace Automation_Intro_1021
             string thirdRowString = thirdRow.GetAttribute("textContent");
 
             //write to file email and actual time
-            //string directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            //string pathToFile = directory + @"\Resources\Files\emailFile.csv";
-            string pathToFile = Path.Combine(AppDomain.CurrentDomain.DynamicDirectory, @"\Resources\Files\emailFile.csv");
+            string directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string path = directory + "\\Resources\\Files\\emailFile.csv";
             string dt = DateTime.Now.ToString();
-            File.AppendAllText(pathToFile, thirdRowString + ',');
-            File.AppendAllText(pathToFile, Convert.ToString(dt) + ',' + Environment.NewLine);
+            File.AppendAllText(path, thirdRowString + ',');
+            File.AppendAllText(path, Convert.ToString(dt) + ',' + Environment.NewLine);
 
             //now you can check value appearing in file: ProjectFolder -> \bin\Debug\net5.0\Resources\Files\emailFile.csv
         }
 
-      
-
-
+  
 
         [TearDown]
         public void closeBrowser()

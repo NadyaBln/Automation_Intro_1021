@@ -10,11 +10,14 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using System.Threading;
 
+
 namespace Automation_Intro_1021
 {
     public static class CommonFunctions
     {
-        //static IWebDriver _driver;
+
+        public static string Login = "";
+        public static string Pass = "";
 
         internal static bool IsElementPresent(By by, IWebDriver _driver)
         {
@@ -77,6 +80,29 @@ namespace Automation_Intro_1021
             catch (NoSuchElementException)
             {
                 return null;
+            }
+        }
+        internal static void GetUserdataFromResourceFile()
+        {
+            string directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string path = directory + "\\Resources\\AccountDetails.xml";
+            XmlDocument accountDetails = new();
+            accountDetails.Load(path);
+
+            XmlElement xRoot = accountDetails.DocumentElement;
+
+            foreach (XmlNode xnode in xRoot)
+            {
+                if (xnode.Attributes.Count > 0)
+                {
+                    XmlNode attr = xnode.Attributes.GetNamedItem("type");
+                    if (attr.Value == "UserCreds")
+                    {
+                        Login = xnode.ChildNodes[0].InnerText;
+                        Pass = xnode.ChildNodes[1].InnerText;
+                    }
+
+                }
             }
         }
     }
