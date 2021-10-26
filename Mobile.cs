@@ -40,6 +40,9 @@ namespace Automation_Intro_1021
 
         public void OrderProcess()
         {
+            //in this test user logged in, opened certain category on products, select one,
+            //change amount of product and add it to cart. Checking of successful adding
+
             _driver.Url = "http://automationpractice.com";
             Thread.Sleep(5000);
 
