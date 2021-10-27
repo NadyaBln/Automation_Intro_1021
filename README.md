@@ -5,19 +5,19 @@
 ___________________
 
 ### Content:
-1. **Class 'TC_Web.cs'** contains web test cases:
+**1. Class 'TC_Web.cs'** contains web test cases:
 - Registration - just usual registration, also example of generated values;
 - UI_Interactions_dragdrop;
 - UI_Interactions_FileUpload;
 - UI_Interactions_WriteValueToFile;
 
-2. **Class 'TC_Mobile.cs'** contains test cases with run in a mobile view:
+**2. Class 'TC_Mobile.cs'** contains test cases with run in a mobile view:
 - 'OrderProcess' - user scenario of selecting and adding product to the cart;
 - 'ProgressBarStopping' - start and stop progress bar on a certain value;
 
-3. **Class 'CommonFunctions.cs'** contains methods and functions which could be used for all tests;
+**3. Class 'CommonFunctions.cs'** contains methods and functions which could be used for all tests;
 
-4. **Folder 'Resources'** contains:
+**4. Folder 'Resources'** contains:
 - ChromeDriver;
 - File 'emailFile' for test values;
 - Folder 'Images';
