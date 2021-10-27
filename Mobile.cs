@@ -38,10 +38,10 @@ namespace Automation_Intro_1021
 
         [Test]
 
-        public void OrderProcess()
+        public void AddProductToCart()
         {
-            //in this test user logged in, opened certain category on products, select one,
-            //change amount of product and add it to cart. Checking of successful adding
+            //in this test user logged in, opened certain category on products, select one product,
+            //change it amount and add it to cart. Checking of successful adding
 
             _driver.Url = "http://automationpractice.com";
             Thread.Sleep(5000);
@@ -85,16 +85,75 @@ namespace Automation_Intro_1021
             //select amount 
             _driver.FindElement(By.CssSelector("i.icon-plus")).Click();
             Thread.Sleep(1000);
-            //Add to cart btn
-            _driver.FindElement(By.CssSelector("button.exclusive")).Click();
+
+            //scroll to btn 'Add to cart' and click
+            var AddToCartBtn = _driver.FindElement(By.CssSelector("button.exclusive"));
+            Actions actions = new Actions(_driver);
+            actions.MoveToElement(AddToCartBtn);
+            actions.Perform();      
             Thread.Sleep(2000);
 
             //check is item added to cart
             bool cartMessage = CommonFunctions.IsElementPresent(By.CssSelector("i.icon-ok"), _driver);
             Assert.AreEqual(cartMessage, true, "Item is not added to cart");
             Thread.Sleep(3000);
-
         }
+
+        [Test]
+        public void ProgressBarStopping()
+        {
+            //some mobile interactions
+            _driver.Url = "https://demoqa.com/";
+            Thread.Sleep(3000);
+
+            //open Widgets
+            _driver.FindElement(By.XPath("//div[@class='card mt-4 top-card'][4]")).Click();
+
+            //open  'Progress bar' tab
+            _driver.FindElement(By.XPath("//span[text()='Progress Bar']")).Click();
+
+            //check is it opened 
+            bool progressBarContainer = CommonFunctions.IsElementPresent(By.Id("progressBarContainer"), _driver);
+            Assert.AreEqual(progressBarContainer, true, "Progress bar tab was not opened");
+            Thread.Sleep(3000);
+
+
+            //click Start
+            IWebElement StartStopBtn = _driver.FindElement(By.Id("startStopButton"));
+            StartStopBtn.Click();
+
+            //find progress bar line
+            IWebElement ProgressBarLine = _driver.FindElement(By.XPath("//div[@role='progressbar']"));
+            //get text from progress bar element and delete '%'
+            string ProgressBarText = ProgressBarLine.GetAttribute("textContent");
+            ProgressBarText = ProgressBarText.Replace("%", "");
+            //convert it to int
+            int pbtextint = Convert.ToInt32(ProgressBarText);
+            int WantToStopValue = 25;
+
+            do
+            {
+                ProgressBarText = ProgressBarLine.GetAttribute("textContent");
+                ProgressBarText = ProgressBarText.Replace("%", "");
+                pbtextint = Convert.ToInt32(ProgressBarText);
+            }
+
+            while (pbtextint != WantToStopValue);
+            //stop pr bar
+            StartStopBtn.Click();
+            Thread.Sleep(2000);
+
+            //Check was stop correct
+            //get value from element one more time and make it int
+            ProgressBarText = ProgressBarLine.GetAttribute("textContent");
+            ProgressBarText = ProgressBarText.Replace("%", "");
+            pbtextint = Convert.ToInt32(ProgressBarText);
+            //WantToStopValue +1 - correction for the operation duration
+            ++WantToStopValue;
+            //check
+            Assert.AreEqual(pbtextint, WantToStopValue, "Incorrect Stop");
+        }
+
 
         [TearDown]
         public void closeBrowser()
