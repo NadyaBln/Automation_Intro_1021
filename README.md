@@ -1,10 +1,10 @@
-## Description:
+### Description:
 	Automation_Intro_1021 - 
 	is a collection of autotests to introduce my skills in C# + Selenium automation.
 	
-> NB: Project is still in progress!
+NB: Project is still in progress!
 
-## Content:
+### Content:
 	 - Class 'TC_Web.cs' contains web test cases:
 		* Registration - just usual registration, also example of generated values;
 		* UI_Interactions_dragdrop;
@@ -18,17 +18,17 @@
 	- Class 'CommonFunctions.cs' contains methods and functions which could be used for all tests;
 
 	- Folder 'Resources' contains:
-		1. ChromeDriver;
-		2. file 'emailFile' for test values;
-		3. folder 'Images';
-		4. xml file 'AccountDetails' with test user credentials;
+		* ChromeDriver;
+		* file 'emailFile' for test values;
+		* folder 'Images';
+		* xml file 'AccountDetails' with test user credentials;
 		
-> NB2: Please bear in mind that site [Link](http://automationpractice.com) (used by tests 'Registration', 'OrderProcess') 
-> could be unreachable due to error 508 - Resource Limit Is Reached.
-> You could wait a while or just glance my code and run another tests.
-> I hope you do not face this problem.
+###### NB2: Please bear in mind that site *http://automationpractice.com* (used by tests 'Registration', 'OrderProcess') 
+###### could be unreachable due to error 508 - Resource Limit Is Reached.
+###### You could wait a while or just glance my code and run another tests.
+###### I hope you do not face this problem.
 
-## How to install:
+### How to install:
 	1. Open solution with Visual Studio;
 	2. For solution you need NuGet packages:
 		- Selenium.WebDriver;
