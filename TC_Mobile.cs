@@ -23,7 +23,7 @@ namespace Automation_Intro_1021
         {
 
         }
-        conflictVS
+changeGit
         [SetUp]
         public void StartBrowserMobView()
         {
